@@ -1,0 +1,25 @@
+#!/bin/csh -f
+
+gmtset ANNOT_FONT_PRIMARY Times-Roman
+gmtset HEADER_FONT Times-Roman
+gmtset LABEL_FONT Times-Roman
+gmtset PAPER_MEDIA  A3
+gmtset TICK_LENGTH=0.1
+
+set psfile = amplitude_Epi.ps
+set size = 25c/12cl
+set range = 1/100/0.00005/0.1
+
+
+
+psbasemap  -R$range -JX$size -Ba10f5:"Epicentral distance (\260)":/a10f10p:"P Maximum Displacement (m)":SW -K  -P -Y5c > $psfile
+
+
+awk '{print $2,$3}' Max_disp_gcarc.txt | psxy -R$range -JX$size -Ggray80 -Sc0.45c -K -O >> $psfile
+
+
+
+
+ps2pdf $psfile amplitude_Epi.pdf
+
+gs amplitude_Epi.ps
