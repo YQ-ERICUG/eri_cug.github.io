@@ -38,7 +38,6 @@ saclst stlo stla f *.SAC | awk '{print $2,$3}' | psxy -J -R -K -O -St0.4c -Ggree
 echo $eqlo $eqla  | psxy -J -R -K -O -Sa0.6c -Gred >> $psfile
  
 
-
-
-ps2pdf $psfile Fig.web_top.pdf
+ps2pdf $psfile Fig_1.pdf
+pdfcrop --margin 5 Fig_1.pdf Fig.web_top.pdf
 gs Fig.web_top.pdf
