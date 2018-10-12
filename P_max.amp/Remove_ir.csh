@@ -38,7 +38,7 @@ foreach sacfile (*.SAC)
            set depmax = `saclst depmax f $sacfile.cut | awk '{printf "%g", $2}'`
            set gcarc  = `saclst gcarc f $sacfile.cut | awk '{printf "%g", $2}'`
            set depmin = `saclst depmin f $sacfile.cut | awk '{printf "%g", $2}'`
-           set dismax = `echo $depmax -$depmin | awk '{if ($1 > $2) print $1; else print $2}'` 
+           set dismax = `echo $depmax $depmin | awk '{if ($1 > -$2) print $1; else print -$2}'` 
  
            if ($nsacfile == 1) then
              echo $sacfile.cut $gcarc $dismax $depmax  $depmin  > Max_disp_gcarc.txt
